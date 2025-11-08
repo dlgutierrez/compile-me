@@ -1,0 +1,35 @@
+este es un ejemplo funcional de como compilar un servidor FastAPI con Nuitka
+
+uv sync
+
+para compilar el proyecto seria asi
+
+uv run nuitka --onefile main.py
+uv run nuitka --onefile client.py
+
+
+luego correr el main.py que es el server (renombrar a server.py para que sea mas claro)
+y en otra ventana correr el client.py
+
+deberias ver el siguiente output:
+
+```pycon
+🚀 Testing FastAPI endpoints...
+
+Testing root endpoint (GET /)...
+Status Code: 200
+Response: {'Hello': 'World'}
+--------------------------------------------------
+Testing items endpoint (GET /items/42)...
+Status Code: 200
+Response: {'item_id': 42, 'q': None}
+--------------------------------------------------
+Testing items endpoint (GET /items/123)...
+Status Code: 200
+Response: {'item_id': 123, 'q': 'test query'}
+--------------------------------------------------
+Testing items endpoint (GET /items/999)...
+Status Code: 200
+Response: {'item_id': 999, 'q': 'another test'}
+--------------------------------------------------
+```
