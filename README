@@ -1,1 +1,13 @@
-hola mundo
+Compile-me existe para que la gente pueda clonar y experimentar facilmente con Nuitka
+
+para hacer el proceso mas facil, utilizaremos UV para manejar versiones python y manejar los proyectos https://docs.astral.sh/uv/
+
+dentro de cada proyecto ejemplar, ejecutar uv sync para syncronizar las dependencias
+ejemplo, para manejar el ejemplo de fastapi
+
+cd fast_api_example
+
+uv sync
+
+Nuitka automaticamente se sincronizara con uv sync al estar en el grupo de desarrollo
+
