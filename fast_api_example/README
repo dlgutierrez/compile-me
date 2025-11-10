@@ -1,12 +1,12 @@
 
-================================================================================================
+=======================================================================
 🚀 Ejemplo funcional de como compilar un servidor FastAPI con Nuitka
-================================================================================================
+=======================================================================
 
 # 1. Estar en el path del proyecto a ejecutar
 cd compile-me/fast_api_example
 
-# 2. Instalar las dependencias pyproject.toml (utiliza uv.lock para acelerar el proceso)
+# 2. Instalar las dependencias que contiene pyproject.toml (utiliza uv.lock para acelerar el proceso)
 
 uv sync
 
@@ -34,7 +34,6 @@ INFO:     127.0.0.1:52914 - "GET /items/42 HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50329 - "GET /items/123?q=test+query HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50332 - "GET /items/999?q=another+test HTTP/1.1" 200 OK
 ```
-
 
 ## client.py
 
