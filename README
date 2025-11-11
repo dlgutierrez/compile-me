@@ -3,7 +3,7 @@
 🚀 Compile-me: existe para que la gente pueda clonar y experimentar facilmente con Nuitka & uv
 ================================================================================================
 
-[BADGE] Versión: 1.0.0 | [BADGE] Licencia: Informational | [BADGE] Python: 3.11+
+[BADGE] Versión: 1.0.0 | [BADGE] Licencia: Informational | [BADGE] Python: 3.8+
 
 Este repositorio está diseñado para desarrolladores Python que buscan llevar sus scripts o microservicios a producción con la máxima velocidad y portabilidad.
 
@@ -78,7 +78,7 @@ Una vez activado el entorno e sincronizadas las dependencias, puedes ejecutar co
 Para generar un ejecutable standalone (autónomo) que incluya todo lo necesario para correr la API sin dependencias externas:
 
     # Comando de compilación a binario (standalone) con Nuitka
-    python -m nuitka \
+    uv run nuitka \
       --standalone \
       --follow-imports \
       --output-dir=dist \

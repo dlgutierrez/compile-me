@@ -20,12 +20,17 @@ Documentación Interactiva (Swagger UI): http://localhost:5000/docs
 
 # 3 Compilacion a Binario
 
+--standalone: Empaqueta todas las dependencias.
+--onefile: Genera un único ejecutable (opcional; puedes omitirlo si prefieres carpeta).
 uv run nuitka --standalone
 uv run nuitka --onefile main.py
 uv run nuitka --onefile client.py
 
+⚠️ Si usas --onefile, ten en cuenta que la primera ejecución puede ser lenta porque el ejecutable se descomprime en disco. 
+
 luego correr el main.py que es el server (renombrar a server.py para que sea mas claro)
 y en otra ventana correr el client.py
+
 
 deberias ver el siguiente output:
 ## server.py
