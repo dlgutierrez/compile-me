@@ -24,8 +24,7 @@ Esto elimina la necesidad de que el usuario final instale Python o configure ent
 4.  Uso y Desarrollo
 5.  Compilación a Binario (con Nuitka)
 6.  Estructura del Proyecto
-7.  Contribuir
-8.  Licencia
+7.  Licencia
 
 ---
 
@@ -58,8 +57,8 @@ Asegúrate de tener instalados los siguientes:
 Clona el repositorio y usa uv para configurar tu entorno de desarrollo:
 
     # 1. Clonar el repositorio
-    git clone https://github.com/tu-usuario/tu-proyecto.git
-    cd tu-proyecto
+    git clone https://github.com/KRRT7/compile-me.git
+    cd compile-me
 
     # 2. Inicializar el entorno virtual y resolver dependencias
     # uv lee pyproject.toml y crea el .venv automáticamente
@@ -68,13 +67,9 @@ Clona el repositorio y usa uv para configurar tu entorno de desarrollo:
 
 4. USO Y DESARROLLO
 
-Una vez activado el entorno, puedes ejecutar la API con uvicorn:
+Una vez activado el entorno e sincronizadas las dependencias, puedes ejecutar con:
 
-    # Ejecutar el servidor de desarrollo con recarga automática
-    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-La API estará disponible en: http://127.0.0.1:8000
-Documentación Interactiva (Swagger UI): http://127.0.0.1:8000/docs
+    # uv run
 
 ---
 
@@ -91,7 +86,7 @@ Para generar un ejecutable standalone (autónomo) que incluya todo lo necesario 
       --plugin-enable=pyside6 \
       app/main.py
 
-Resultado: El ejecutable binario y sus dependencias se encontrarán en la carpeta dist/app.onefile.exe (el nombre puede variar según el SO).
+Resultado: El ejecutable binario y sus dependencias se encontrarán en la carpeta dist/main.onefile.exe (el nombre puede variar según el SO).
 
 Ejecución del Binario
     # Ejecutar el binario compilado (ejemplo Linux/macOS)
@@ -99,28 +94,27 @@ Ejecución del Binario
     # O en Windows:
     .\dist\app.main.exe
 
+    # Comando de compilación a binario (--onefile) con Nuitka
+    uv run nuitka --onefile main.py
+
 ---
 
 6. ESTRUCTURA DEL PROYECTO
 
 .
-├── app/
+├── COMPILE-ME/
 │   ├── __init__.py
-│   └── main.py              # La aplicación principal de FastAPI
+│   └── fast_api_example              # La aplicación principal de FastAPI  
+    └── NLP_example
+    └── tkinter_example 
 ├── .gitignore
 ├── pyproject.toml           # Define dependencias (instaladas con uv)
 ├── uv.lock                  # Lock file de uv (para builds reproducibles)
-├── README.md                # Este archivo
-└── LICENSE
+├── LICENSE                # Este archivo
+└── README
 
 ---
 
-7. CONTRIBUIR
+7. LICENCIA
 
-¡Agradecemos las contribuciones! Consulta el archivo CONTRIBUTING.md para conocer las pautas de desarrollo, pruebas y presentación de Pull Requests.
-
----
-
-8. LICENCIA
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para obtener más detalles.
+Este proyecto está bajo la Licencia (http://www.apache.org/licenses/). Consulta el archivo LICENSE para obtener más detalles.

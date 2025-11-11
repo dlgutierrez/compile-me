@@ -10,11 +10,16 @@ cd compile-me/fast_api_example
 
 uv sync
 
-# 3 Compilar el proyecto
-uv run nuitka --onefile main.py
-uv run nuitka --onefile client.py
+# 3 Ejecutar uv run crea y activa el entorno virtual (--remove-output para eliminar los archivos intermedio)
 
-# 4 Ejecutar uv run crea y activa el entorno virtual (--remove-output para eliminar los archivos intermedio)
+uv run
+
+La API estará disponible en: http://localhost:5000
+Documentación Interactiva (Swagger UI): http://localhost:5000/docs
+
+
+# 3 Compilacion a Binario
+
 uv run nuitka --standalone
 uv run nuitka --onefile main.py
 uv run nuitka --onefile client.py
