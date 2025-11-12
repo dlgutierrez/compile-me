@@ -1,0 +1,120 @@
+
+================================================================================================
+🚀 Compile-me: existe para que la gente pueda clonar y experimentar facilmente con Nuitka & uv
+================================================================================================
+
+[BADGE] Versión: 1.0.0 | [BADGE] Licencia: Informational | [BADGE] Python: 3.8+
+
+Este repositorio está diseñado para desarrolladores Python que buscan llevar sus scripts o microservicios a producción con la máxima velocidad y portabilidad.
+
+Los ejemplos que se exponen en el proyecto demuestra las mejores practicas para:
+
+Gestión de Dependencias Ultra-Rápida: Uso de uv (el gestor de paquetes de Astral) para instalar, resolver y gestionar dependencias de forma casi instantánea.
+
+Distribución Simple y Segura: Compilación de la aplicación Python y todas sus dependencias en un único archivo binario ejecutable (standalone) usando Nuitka.
+
+Esto elimina la necesidad de que el usuario final instale Python o configure entornos, permitiendo un despliegue limpio y directo.
+---
+
+📝 TABLA DE CONTENIDOS
+
+1.  Características Principales
+2.  Requisitos
+3.  Instalación (con uv)
+4.  Uso y Desarrollo
+5.  Compilación a Binario (con Nuitka)
+6.  Estructura del Proyecto
+7.  Licencia
+
+---
+
+1. CARACTERÍSTICAS PRINCIPALES
+
+* uv: Gestión de entornos y paquetes increíblemente rápida (reemplazo de pip, pip-tools y venv).
+      https://docs.astral.sh/uv/
+* Nuitka: Compilador que transforma el código Python y sus dependencias en un binario ejecutable.
+          https://nuitka.net/
+* Rendimiento y Portabilidad: Despliega un único archivo binario, ideal para entornos sin Python preinstalado.
+
+---
+
+2. REQUISITOS
+
+Asegúrate de tener instalados los siguientes:
+
+* uv: Instalado globalmente.
+    # Instalación de uv (usando curl o pipx)
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    # O
+    pipx install uv
+* uv sync: Para sincronizar las dependencias dentro de cada proyecto ejemplar
+* Nuitka: Se instalará como una dependencia de desarrollo que automaticamente se sincroniza con uv sync, pero a veces requiere herramientas de compilación del sistema (como gcc o Visual Studio Build Tools).
+---
+
+
+3. INSTALACIÓN (con uv)
+
+Clona el repositorio y usa uv para configurar tu entorno de desarrollo:
+
+    # 1. Clonar el repositorio
+    git clone https://github.com/KRRT7/compile-me.git
+    cd compile-me
+
+    # 2. Inicializar el entorno virtual y resolver dependencias
+    # uv lee pyproject.toml y crea el .venv automáticamente
+    uv sync
+---
+
+4. USO Y DESARROLLO
+
+Una vez activado el entorno e sincronizadas las dependencias, puedes ejecutar con:
+
+    # uv run
+
+---
+
+5. COMPILACIÓN A BINARIO (con Nuitka)
+
+Para generar un ejecutable standalone (autónomo) que incluya todo lo necesario para correr la API sin dependencias externas:
+
+    # Comando de compilación a binario (standalone) con Nuitka
+    uv run nuitka \
+      --standalone \
+      --follow-imports \
+      --output-dir=dist \
+      --include-package=uvicorn.server \
+      --plugin-enable=pyside6 \
+      app/main.py
+
+Resultado: El ejecutable binario y sus dependencias se encontrarán en la carpeta dist/main.onefile.exe (el nombre puede variar según el SO).
+
+Ejecución del Binario
+    # Ejecutar el binario compilado (ejemplo Linux/macOS)
+    ./dist/app.bin.dist/app.main
+    # O en Windows:
+    .\dist\app.main.exe
+
+    # Comando de compilación a binario (--onefile) con Nuitka
+    uv run nuitka --onefile main.py
+
+---
+
+6. ESTRUCTURA DEL PROYECTO
+
+.
+├── COMPILE-ME/
+│   ├── __init__.py
+│   └── fast_api_example              # La aplicación principal de FastAPI  
+    └── NLP_example
+    └── tkinter_example 
+├── .gitignore
+├── pyproject.toml           # Define dependencias (instaladas con uv)
+├── uv.lock                  # Lock file de uv (para builds reproducibles)
+├── LICENSE                # Este archivo
+└── README
+
+---
+
+7. LICENCIA
+
+Este proyecto está bajo la Licencia (http://www.apache.org/licenses/). Consulta el archivo LICENSE para obtener más detalles.

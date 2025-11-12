@@ -1,0 +1,79 @@
+
+=======================================================================
+🚀 Ejemplo funcional de como compilar un servidor FastAPI con Nuitka
+=======================================================================
+
+# 1. Estar en el path del proyecto a ejecutar
+cd compile-me/fast_api_example
+
+# 2. Instalar las dependencias que contiene pyproject.toml (utiliza uv.lock para acelerar el proceso)
+
+uv sync
+
+# 3 Ejecutar uv run crea y activa el entorno virtual (--remove-output para eliminar los archivos intermedio)
+
+uv run
+
+La API estará disponible en: http://localhost:5000
+Documentación Interactiva (Swagger UI): http://localhost:5000/docs
+
+
+# 3 Compilacion a Binario
+
+--standalone: Empaqueta todas las dependencias.
+--onefile: Genera un único ejecutable (opcional; puedes omitirlo si prefieres carpeta).
+uv run nuitka --standalone
+uv run nuitka --onefile main.py
+uv run nuitka --onefile client.py
+
+⚠️ Si usas --onefile, ten en cuenta que la primera ejecución puede ser lenta porque el ejecutable se descomprime en disco. 
+
+luego correr el main.py que es el server (renombrar a server.py para que sea mas claro)
+y en otra ventana correr el client.py
+
+
+deberias ver el siguiente output:
+## server.py
+```pycon
+INFO:     Started server process [8912]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52912 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52914 - "GET /items/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50329 - "GET /items/123?q=test+query HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50332 - "GET /items/999?q=another+test HTTP/1.1" 200 OK
+```
+
+## client.py
+
+```pycon
+🚀 Testing FastAPI endpoints...
+
+Testing root endpoint (GET /)...
+Status Code: 200
+Response: {'Hello': 'World'}
+--------------------------------------------------
+Testing items endpoint (GET /items/42)...
+Status Code: 200
+Response: {'item_id': 42, 'q': None}
+--------------------------------------------------
+Testing items endpoint (GET /items/123)...
+Status Code: 200
+Response: {'item_id': 123, 'q': 'test query'}
+--------------------------------------------------
+Testing items endpoint (GET /items/999)...
+Status Code: 200
+Response: {'item_id': 999, 'q': 'another test'}
+--------------------------------------------------
+```
+
+
+
+
+
+
+
+
+
+

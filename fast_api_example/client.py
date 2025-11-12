@@ -3,7 +3,7 @@ import requests
 from typing import Optional
 
 
-BASE_URL = "http://0.0.0.0:5000"
+BASE_URL = "http://localhost:5000"
 
 def test_root_endpoint():
     print("Testing root endpoint (GET /)...")
