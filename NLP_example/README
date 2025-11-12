@@ -1,0 +1,90 @@
+
+================================================================================================
+🚀 Ejemplo funcional de como compilar un NLP con Nuitka
+================================================================================================
+
+# 1. Estar en el path del proyecto a ejecutar
+cd compile-me/NLP_example
+
+# 2. Actualizar las dependencias 
+uv sync
+
+# 2 Compilar el proyecto
+
+uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
+
+uv run nuitka --onefile main.py
+uv run nuitka --onefile client.py
+
+# 4 Ejecutar uv run crea y activa el entorno virtual (--remove-output para eliminar los archivos intermedio)
+uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
+uv run nuitka --onefile main.py
+
+El programa debería descargar los recursos de NLTK la primera vez que se ejecute (si no están ya instalados globalmente).
+Luego debería procesar el texto con NLTK y spaCy sin errores.
+
+## ouput:
+C:\Users\KRRT7\Documents\Loribeth\compile-me\NLP_example>uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
+Nuitka-Options: Used command line options:
+Nuitka-Options:   --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
+Nuitka: Starting Python compilation with:
+Nuitka:   Version '2.7.14' on Python 3.13 (flavor 'Unknown') commercial grade 'not installed'.
+Nuitka: Completed Python level compilation and optimization.
+Nuitka: Generating source code for C backend compiler.
+Nuitka: Running data composer tool for optimal constant value handling.
+Nuitka: Running C compilation via Scons.
+Nuitka-Scons: Backend C compiler: cl (cl 14.3).
+Nuitka-Scons: Backend C linking with 1895 files (no progress information available for this stage).
+Nuitka-Scons: Compiled 1895 C files using clcache with 1893 cache hits and 2 cache misses.
+Nuitka-Plugins:data-files: Included data file 'certifi\cacert.pem' due to package data for 'certifi'.
+Nuitka-Plugins:data-files: Included data file 'jaraco\text\Lorem ipsum.txt' due to package data for 'jaraco.text'.
+Nuitka-Plugins:data-files: Included 99 data files due to package data directory '.' for 'spacy'.
+Nuitka-Plugins:spacy: Included 28 data files due to model data for 'en_core_web_sm'.
+Nuitka-Plugins:data-files: Included data file 'thinc\backends\_custom_kernels.cu' due to package data for 'thinc.backends'.
+Nuitka-Plugins:data-files: Included data file 'thinc\backends\_murmur3.cu' due to package data for 'thinc.backends'.
+Nuitka: Keeping build directory 'dist\main.build'.
+Nuitka: Successfully created '~\Documents\Loribeth\compile-me\NLP_example\dist\main.dist\main.exe'.
+
+(NLP_example) C:\Users\KRRT7\Documents\Loribeth\compile-me\NLP_example>dist\main.dist\main.exe
+
+# 5 Listar dependencias instaladas:
+ uv pip list
+
+# 4 Ejecuta el archivo compilado:
+Después de que termine la compilación, ejecuta:
+dist\main.dist\main.exe
+
+
+deberias ver el siguiente output:
+
+## main.py
+
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     C:\Users\KRRT7\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+[nltk_data] Downloading package averaged_perceptron_tagger_eng to
+[nltk_data]     C:\Users\KRRT7\AppData\Roaming\nltk_data...
+[nltk_data]   Package averaged_perceptron_tagger_eng is already up-to-
+[nltk_data]       date!
+['At', 'eight', "o'clock", 'on', 'Thursday', 'morning', '...', 'Arthur', 'did', "n't", 'feel', 'very', 'good', '.']
+[('At', 'IN'), ('eight', 'CD'), ("o'clock", 'NN'), ('on', 'IN'), ('Thursday', 'NNP'), ('morning', 'NN')]
+Apple Apple PROPN NNP nsubj Xxxxx True False
+is be AUX VBZ aux xx True True
+looking look VERB VBG ROOT xxxx True False
+at at ADP IN prep xx True True
+buying buy VERB VBG pcomp xxxx True False
+U.K. U.K. PROPN NNP nsubj X.X. False False
+startup startup VERB VBD ccomp xxxx True False
+for for ADP IN prep xxx True True
+$ $ SYM $ quantmod $ False False
+1 1 NUM CD compound d False False
+billion billion NUM CD pobj xxxx True False
+
+
+
+
+
+
+
+
+
