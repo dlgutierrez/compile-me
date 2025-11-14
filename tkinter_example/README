@@ -1,0 +1,128 @@
+
+================================================================================================
+🚀 Ejemplo funcional de como compilar una GUI con la biblioteca [CustomTkinter] con Nuitka
+================================================================================================
+
+# 1. **Estar en el path del proyecto a ejecutar:**
+    ```bash
+       cd compile-me/tkinter_example
+    ```
+
+# 2. **Sincronización de Dependencias:**
+    ```bash
+      uv sync
+    ```
+
+# 3 **Compilar el proyecto con nuitka:**
+
+    uv run nuitka --standalone main.py :Nuitka-Plugins:WARNING: Use '--enable-plugin=tk-inter' for: Tkinter needs TCL included.
+
+    si la compilacion genera un warning es probable que el ejecutable tenga errores; la mejor práctica en la ejecuciones es evitar que se genere Warnings, ya que no podra incluir los recursos necesarios de las librerias CustomTkinter(los .json de temas), los cuales no se incluyen automáticamente en el ejecutable por Nuitka..
+
+
+##  **Compilación con Nuitka:**
+*   Se ejecutó Nuitka con las opciones correctas para:
+        *   Crear un ejecutable independiente (`--standalone`).
+        *   Incluir un solo archivo ejecutable (`--onefile`).
+        *   Activar el plugin necesario para `tkinter` (`--enable-plugin=tk-inter`).
+        *   Incluir manualmente la carpeta de recursos de `customtkinter` (`--include-data-dir`).
+
+    ```bash
+        uv run nuitka --standalone --onefile --enable-plugin=tk-inter 
+        --include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter --output-dir=dist main.py´
+    ```
+
+
+## ouput:
+    C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example>uv run nuitka --standalone --onefile --enable-plugin=tk-inter --include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter --output-dir=dist main.py
+    Nuitka-Options: Used command line options:
+    Nuitka-Options:   --standalone --onefile --enable-plugin=tk-inter
+    Nuitka-Options:   --include-data-dir=C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter=customtkinter
+    Nuitka-Options:   --output-dir=dist main.py
+    Nuitka: Starting Python compilation with:
+    Nuitka:   Version '2.7.14' on Python 3.13 (flavor 'Unknown') commercial grade 'not installed'.
+    Nuitka: Completed Python level compilation and optimization.
+    Nuitka: Generating source code for C backend compiler.
+    Nuitka: Running data composer tool for optimal constant value handling.
+    Nuitka: Running C compilation via Scons.
+    Nuitka-Scons: Backend C compiler: cl (cl 14.3).
+    Nuitka-Scons: Backend C linking with 53 files (no progress information available for this stage).
+    Nuitka-Scons: Compiled 53 C files using clcache with 4 cache hits and 49 cache misses.
+    Nuitka-Options: Included data file 'customtkinter\assets\fonts\CustomTkinter_shapes_font.otf' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Options: Included data file 'customtkinter\assets\fonts\Roboto\Roboto-Medium.ttf' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Options: Included data file 'customtkinter\assets\fonts\Roboto\Roboto-Regular.ttf' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Options: Included data file 'customtkinter\assets\icons\CustomTkinter_icon_Windows.ico' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Options: Included data file 'customtkinter\assets\themes\blue.json' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Options: Included data file 'customtkinter\assets\themes\dark-blue.json' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Options: Included data file 'customtkinter\assets\themes\green.json' due to specified data dir
+    Nuitka-Options: 'C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter' on
+    Nuitka-Options: command line.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\fonts\CustomTkinter_shapes_font.otf' due to package
+    Nuitka-Plugins:data-files: data directory 'assets' for 'customtkinter'.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\fonts\Roboto\Roboto-Medium.ttf' due to package data
+    Nuitka-Plugins:data-files: directory 'assets' for 'customtkinter'.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\fonts\Roboto\Roboto-Regular.ttf' due to package data
+    Nuitka-Plugins:data-files: directory 'assets' for 'customtkinter'.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\icons\CustomTkinter_icon_Windows.ico' due to package
+    Nuitka-Plugins:data-files: data directory 'assets' for 'customtkinter'.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\themes\blue.json' due to package data directory
+    Nuitka-Plugins:data-files: 'assets' for 'customtkinter'.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\themes\dark-blue.json' due to package data directory
+    Nuitka-Plugins:data-files: 'assets' for 'customtkinter'.
+    Nuitka-Plugins:data-files: Included data file 'customtkinter\assets\themes\green.json' due to package data directory
+    Nuitka-Plugins:data-files: 'assets' for 'customtkinter'.
+    Nuitka-Plugins:tk-inter: Included 87 data files due to Tk needed for tkinter usage.
+    Nuitka-Plugins:tk-inter: Included 835 data files due to Tcl needed for tkinter usage.
+    Nuitka-Postprocessing: Creating single file from dist folder, this may take a while.
+    Nuitka-Onefile: Running bootstrap binary compilation via Scons.
+    Nuitka-Scons: Onefile C compiler: cl (cl 14.3).
+    Nuitka-Scons: Onefile C linking.
+    Nuitka-Scons: Compiled 1 C files using clcache with 1 cache hits and 0 cache misses.
+    Nuitka-Onefile: Using compression for onefile payload.
+    Nuitka-Onefile: Onefile payload compression ratio (26.62%) size 33692167 to 8968654.
+    Nuitka-Onefile: Keeping onefile build directory 'dist\main.onefile-build'.
+    Nuitka: Keeping dist folder 'dist\main.dist' for inspection, no need to use it.
+    Nuitka: Keeping build directory 'dist\main.build'.
+    Nuitka: Successfully created '~\Documents\Loribeth\compile-me\tkinter_example\dist\main.exe'.
+
+
+# 5 Ejecuta el archivo compilado:
+    Después de que termine la compilación, ejecuta:
+    ```bash
+        dist\main.exe
+    ```
+
+deberias ver el siguiente output:
+
+## main.py
+
+[Aquí tienes una captura de la interfaz:
+
+![Interfaz de la aplicación CustomTkinter](CustomTkinter.png)
+
+## Notas
+
+*   El uso de `--include-data-dir` es crucial para que la aplicación GUI funcione correctamente, ya que incluye los archivos de tema y otros recursos de `CustomTkinter`.
+*   La ruta especificada en `--include-data-dir` debe apuntar a la **carpeta** `customtkinter`, no a un archivo individual como `__init__.py`.
+*   El proceso de compilación puede tardar varios minutos.
+
+
+
+
+
+
+
+
+
