@@ -4,24 +4,25 @@
 ================================================================================================
 
 # 1. **Estar en el path del proyecto a ejecutar:**
+
     ```bash
         cd compile-me/NLP_example
     ```
 # 2. **Actualizar las dependencias:** 
+
     ```bash
         uv sync
     ```
-# 3 **Compilar el proyecto:**
-    ```bash
-        uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
-    ```
-    uv run nuitka --onefile main.py
+# 3 **Compilar el proyecto:(--remove-output para eliminar los      archivos      intermedio):**
 
-# 4 **Ejecutar uv run crea y activa el entorno virtual (--remove-output para eliminar los archivos      intermedio):**
     ```bash
         uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
     ```
-    uv run nuitka --onefile main.py
+    Si se ejecuta en un unico archivo; este sera el comnado o simplemente se puede agregar --onefile al lado del --standalone
+
+    ```bash
+        uv run nuitka --onefile --include-package=spacy --spacy-language-model=en_core_web_sm --output-filename=main.exe main.py
+    ```
 
     El programa debería descargar los recursos de NLTK la primera vez que se ejecute (si no están ya instalados globalmente).
     Luego debería procesar el texto con NLTK y spaCy sin errores.
@@ -49,12 +50,6 @@
     Nuitka: Keeping build directory 'dist\main.build'.
     Nuitka: Successfully created '~\Documents\Loribeth\compile-me\NLP_example\dist\main.dist\main.exe'.
 ```
-
-# 5 **Listar dependencias instaladas:**
-    ```bash
-        uv pip list
-    ```
-
 # 6 **Ejecuta el archivo compilado:**
     Después de que termine la compilación, ejecuta:
     ```bash
@@ -86,8 +81,23 @@ deberias ver el siguiente output:
     1 1 NUM CD compound d False False
     billion billion NUM CD pobj xxxx True False
 ```
+## Notas
+
+*   Problema: Nuitka, por defecto, no puede adivinar qué módulos o     paquetes adicionales necesitas además de los que están importados directamente en tu código Python (p. ej., import spacy).
+
+*   SpaCy y sus modelos: SpaCy no solo necesita el código de la biblioteca spacy, sino que también requiere recursos específicos, como modelos de lenguaje (en este caso, en_core_web_sm). Estos modelos no son solo código Python; son directorios con archivos de datos.
 
 
+*   `--include-package=spacy`:Esta opción fuerza a Nuitka a incluir todo el paquete spacy (todos sus módulos y subpaquetes) en el directorio de salida standalone, incluso si Nuitka no lo detecta como necesario solo mirando el main.py. Esto es útil para bibliotecas complejas como SpaCy que pueden cargar módulos dinámicamente.
+
+*    `--spacy-language-model=en_core_web_sm `:
+Esta es una opción específica de Nuitka (probablemente parte de un plugin o soporte integrado para SpaCy)
+
+*   `--output-dir=dist `: Simplemente especifica que el directorio standalone se cree en una carpeta llamada dist en lugar del nombre predeterminado (main.dist).
+
+*   uv sync: prepara tu entorno local con las dependencias, pero Nuitka necesita instrucciones específicas para empaquetarlas correctamente para distribución standalone.
+
+*   El proceso de compilación puede tardar varios minutos.
 
 
 
