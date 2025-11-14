@@ -104,9 +104,9 @@ Ejecución del Binario
 .
 ├── COMPILE-ME/
 │   ├── __init__.py
-│   └── fast_api_example              # La aplicación principal de FastAPI  
-    └── NLP_example
-    └── tkinter_example 
+│   └── fast_api_example              # aplicación principal de FastAPI  
+    └── NLP_example                   # aplicación principal de NLP 
+    └── tkinter_example               # aplicacion principal de una GUI 
 ├── .gitignore
 ├── pyproject.toml           # Define dependencias (instaladas con uv)
 ├── uv.lock                  # Lock file de uv (para builds reproducibles)
