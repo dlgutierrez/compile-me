@@ -48,6 +48,7 @@ Asegúrate de tener instalados los siguientes:
     # O
     pipx install uv
 * uv sync: Para sincronizar las dependencias dentro de cada proyecto ejemplar
+# uv pip list: Listar dependencias instaladas
 * Nuitka: Se instalará como una dependencia de desarrollo que automaticamente se sincroniza con uv sync, pero a veces requiere herramientas de compilación del sistema (como gcc o Visual Studio Build Tools).
 ---
 

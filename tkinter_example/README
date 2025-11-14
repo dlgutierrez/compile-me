@@ -21,17 +21,22 @@
 
 
 ##  **Compilación con Nuitka:**
-*   Se ejecutó Nuitka con las opciones correctas para:
-        *   Crear un ejecutable independiente (`--standalone`).
-        *   Incluir un solo archivo ejecutable (`--onefile`).
-        *   Activar el plugin necesario para `tkinter` (`--enable-plugin=tk-inter`).
+*       *   Activar el plugin necesario para `tkinter` (`--enable-plugin=tk-inter`).
         *   Incluir manualmente la carpeta de recursos de `customtkinter` (`--include-data-dir`).
-
+     
+*   Standalone:  Crear un ejecutable independiente 
     ```bash
-        uv run nuitka --standalone --onefile --enable-plugin=tk-inter 
+        uv run nuitka --standalone  --enable-plugin=tk-inter 
         --include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter --output-dir=dist main.py´
     ```
 
+*   onefile: Incluir un solo archivo ejecutable
+
+    ```bash
+        uv run nuitka --onefile --enable-plugin=tk-inter 
+        --include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter
+        --output-filename=main.exe main.py
+    ```
 
 ## ouput:
     C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example>uv run nuitka --standalone --onefile --enable-plugin=tk-inter --include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter --output-dir=dist main.py
@@ -110,7 +115,7 @@ deberias ver el siguiente output:
 
 [Aquí tienes una captura de la interfaz:
 
-![Interfaz de la aplicación CustomTkinter](CustomTkinter.png)
+![Interfaz de la aplicación CustomTkinter] (CustomTkinter.png)
 
 ## Notas
 
