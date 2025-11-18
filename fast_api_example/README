@@ -12,7 +12,7 @@
         uv sync
     ```
 
-# 3 **Ejecutar uv run crea y activa el entorno virtual (--remove-output para eliminar los archivos intermedio):**
+# 3 **Ejecutar uv run crea y activa el entorno virtual **
     ```bash
         uv run
     ```
@@ -24,7 +24,8 @@
 
     --standalone: Empaqueta todas las dependencias.
     --onefile: Genera un único ejecutable (opcional; puedes omitirlo si prefieres carpeta).
-    uv run nuitka --standalone
+    uv run nuitka --remove-output --standalone main.py
+    uv run nuitka --remove-output --standalone client.py
     uv run nuitka --onefile main.py
     uv run nuitka --onefile client.py
 
@@ -71,9 +72,12 @@ deberias ver el siguiente output:
     --------------------------------------------------
     ```
 
+## --remove-output
 
+*  Qué hace? : Elimina el directorio de salida (por ejemplo, dist/main.dist) antes de iniciar la compilación.
+Es útil cuando usas --standalone o --onefile, para asegurarte de que no queden archivos de una compilación anterior.
 
-
+*  No elimina carpetas como .venv, build, ni archivos temporales de Python.
 
 
 

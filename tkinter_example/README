@@ -12,37 +12,28 @@ uv sync
 
 # 3. Compilar el proyecto con Nuitka:
 
-uv run nuitka --standalone main.py
+uv run nuitka --remove-output --standalone main.py
 
 ⚠️ Advertencia: Si la compilación genera un warning, es probable que el ejecutable tenga errores. La mejor práctica es evitar que se generen Warnings, ya que no podrá incluir los recursos necesarios de las librerías como CustomTkinter (los archivos .json de temas), los cuales no se incluyen automáticamente en el ejecutable por Nuitka.
 
-## Compilación con Nuitka:
+## Compilación con Nuitka de forma Correcta:
 
 - Activar el plugin necesario para tkinter (--enable-plugin=tk-inter).
-- Incluir manualmente la carpeta de recursos de customtkinter (--include-data-dir).
 
 ### Opciones de compilación
 
 Standalone: Crear un ejecutable independiente
 
-uv run nuitka --standalone --enable-plugin=tk-inter \
---include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter \
---output-dir=dist main.py
+uv run nuitka --remove-output --standalone --enable-plugin=tk-inter main.py
 
 Onefile: Incluir un solo archivo ejecutable
 
-uv run nuitka --onefile --enable-plugin=tk-inter \
---include-data-dir="C:\Users\KRRT7\Documents\Loribeth\compile-me\tkinter_example\.venv\Lib\site-packages\customtkinter"=customtkinter \
---output-filename=main.exe main.py
+uv run nuitka --onefile --enable-plugin=tk-inter main.py
 
-## Resultado
+## output
 
 Aquí tienes una captura de la interfaz:
 
-![Interfaz de la aplicación CustomTkinter](tkinter_example/CustomTkinter.png)
+![Interfaz de la aplicación CustomTkinter](CustomTkinter.png)
 
-## Notas
 
-- El uso de --include-data-dir es crucial para que la aplicación GUI funcione correctamente, ya que incluye los archivos de tema y otros recursos de CustomTkinter.
-- La ruta especificada en --include-data-dir debe apuntar a la carpeta customtkinter, no a un archivo individual como __init__.py.
-- El proceso de compilación puede tardar varios minutos.

@@ -16,12 +16,12 @@
 # 3 **Compilar el proyecto:(--remove-output para eliminar los      archivos      intermedio):**
 
     ```bash
-        uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
+        uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm  main.py
     ```
     Si se ejecuta en un unico archivo; este sera el comnado o simplemente se puede agregar --onefile al lado del --standalone
 
     ```bash
-        uv run nuitka --onefile --include-package=spacy --spacy-language-model=en_core_web_sm --output-filename=main.exe main.py
+        uv run nuitka --onefile --include-package=spacy --spacy-language-model=en_core_web_sm main.py
     ```
 
     El programa debería descargar los recursos de NLTK la primera vez que se ejecute (si no están ya instalados globalmente).
@@ -92,8 +92,6 @@ deberias ver el siguiente output:
 
 *    `--spacy-language-model=en_core_web_sm `:
 Esta es una opción específica de Nuitka (probablemente parte de un plugin o soporte integrado para SpaCy)
-
-*   `--output-dir=dist `: Simplemente especifica que el directorio standalone se cree en una carpeta llamada dist en lugar del nombre predeterminado (main.dist).
 
 *   uv sync: prepara tu entorno local con las dependencias, pero Nuitka necesita instrucciones específicas para empaquetarlas correctamente para distribución standalone.
 
