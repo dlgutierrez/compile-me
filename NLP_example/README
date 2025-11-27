@@ -1,62 +1,65 @@
 
-================================================================================================
-🚀 Ejemplo funcional de como compilar un NLP con Nuitka
-================================================================================================
+=======================================================================
+🚀 Functional Example of How to Compile an NLP Project with Nuitka
+=======================================================================
 
-# 1. **Estar en el path del proyecto a ejecutar:**
+1. Be in the project path to execute: 
 
-    ```bash
-        cd compile-me/NLP_example
-    ```
-# 2. **Actualizar las dependencias:** 
+```bash
+    cd compile-me/NLP_example
+```
+2. Update dependencies: 
 
-    ```bash
-        uv sync
-    ```
-# 3 **Compilar el proyecto:(--remove-output para eliminar los      archivos      intermedio):**
+```bash
+    uv sync
+```
+3 Compile the project: (--remove-output to remove intermediate files): 
 
-    ```bash
-        uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm  main.py
-    ```
-    Si se ejecuta en un unico archivo; este sera el comnado o simplemente se puede agregar --onefile al lado del --standalone
+`standalone: `
 
-    ```bash
-        uv run nuitka --onefile --include-package=spacy --spacy-language-model=en_core_web_sm main.py
-    ```
+```bash
+    uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm main.py
+```
 
-    El programa debería descargar los recursos de NLTK la primera vez que se ejecute (si no están ya instalados globalmente).
-    Luego debería procesar el texto con NLTK y spaCy sin errores.
+`onefile: `
 
-## ouput:
+```bash
+    uv run nuitka --onefile --include-package=spacy --spacy-language-model=en_core_web_sm main.py
+```
+
+The program should download NLTK resources the first time it runs (if they are not already globally installed). It should then process the text with NLTK and spaCy without errors.
+
+## output: 
 ```
     C:\Users\KRRT7\Documents\Loribeth\compile-me\NLP_example>uv run nuitka --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
     Nuitka-Options: Used command line options:
     Nuitka-Options:   --standalone --include-package=spacy --spacy-language-model=en_core_web_sm --output-dir=dist main.py
     Nuitka: Starting Python compilation with:
     Nuitka:   Version '2.7.14' on Python 3.13 (flavor 'Unknown') commercial grade 'not installed'.
-    Nuitka: Completed Python level compilation and optimization.
+    Nuitka: Completed Python level compilation and optimization. 
     Nuitka: Generating source code for C backend compiler.
-    Nuitka: Running data composer tool for optimal constant value handling.
+    Nuitka: Running data composer tool for optimal constant value handling. 
     Nuitka: Running C compilation via Scons.
-    Nuitka-Scons: Backend C compiler: cl (cl 14.3).
+    Nuitka-Scons: Backend C compiler: cl (cl 14.3). 
     Nuitka-Scons: Backend C linking with 1895 files (no progress information available for this stage).
-    Nuitka-Scons: Compiled 1895 C files using clcache with 1893 cache hits and 2 cache misses.
+    Nuitka-Scons: Compiled 1895 C files using clcache with 1893 cache hits and 2 cache misses. 
     Nuitka-Plugins:data-files: Included data file 'certifi\cacert.pem' due to package data for 'certifi'.
-    Nuitka-Plugins:data-files: Included data file 'jaraco\text\Lorem ipsum.txt' due to package data for 'jaraco.text'.
-    Nuitka-Plugins:data-files: Included 99 data files due to package data directory '.' for 'spacy'.
-    Nuitka-Plugins:spacy: Included 28 data files due to model data for 'en_core_web_sm'.
+    Nuitka-Plugins:data-files: Included data file 'jaraco\text\Lorem ipsum.txt' due to package data for 'jaraco.text'. 
+    Nuitka-Plugins:data-files: Included 99 data files due to package data directory '.' for 'spacy'. 
+    Nuitka-Plugins:spacy: Included 28 data files due to model data for 'en_core_web_sm'. 
     Nuitka-Plugins:data-files: Included data file 'thinc\backends\_custom_kernels.cu' due to package data for 'thinc.backends'.
-    Nuitka-Plugins:data-files: Included data file 'thinc\backends\_murmur3.cu' due to package data for 'thinc.backends'.
+    Nuitka-Plugins:data-files: Included data file 'thinc\backends\_murmur3.cu' due to package data for 'thinc.backends'. 
     Nuitka: Keeping build directory 'dist\main.build'.
-    Nuitka: Successfully created '~\Documents\Loribeth\compile-me\NLP_example\dist\main.dist\main.exe'.
+    Nuitka: Successfully created '~\Documents\Loribeth\compile-me\NLP_example\dist\main.dist\main.exe'. 
 ```
-# 6 **Ejecuta el archivo compilado:**
-    Después de que termine la compilación, ejecuta:
-    ```bash
-        dist\main.dist\main.exe
-    ```
+6. Execute the compiled file: 
 
-deberias ver el siguiente output:
+After compilation finishes, run:
+
+```bash
+    dist\main.dist\main.exe
+```
+You should see the following output:
 
 ## main.py
 ```
@@ -66,40 +69,38 @@ deberias ver el siguiente output:
     [nltk_data] Downloading package averaged_perceptron_tagger_eng to
     [nltk_data]     C:\Users\KRRT7\AppData\Roaming\nltk_data...
     [nltk_data]   Package averaged_perceptron_tagger_eng is already up-to-
-    [nltk_data]       date!
-    ['At', 'eight', "o'clock", 'on', 'Thursday', 'morning', '...', 'Arthur', 'did', "n't", 'feel', 'very', 'good', '.']
-    [('At', 'IN'), ('eight', 'CD'), ("o'clock", 'NN'), ('on', 'IN'), ('Thursday', 'NNP'), ('morning', 'NN')]
+    [nltk_data]       date! 
+    ['At', 'eight', "o'clock", 'on', 'Thursday', 'morning', '...', 'Arthur', 'did', "n't", 'feel', 'very', 'good', '.'] 
+    [('At', 'IN'), ('eight', 'CD'), ("o'clock", 'NN'), ('on', 'IN'), ('Thursday', 'NNP'), ('morning', 'NN')] 
     Apple Apple PROPN NNP nsubj Xxxxx True False
     is be AUX VBZ aux xx True True
     looking look VERB VBG ROOT xxxx True False
     at at ADP IN prep xx True True
     buying buy VERB VBG pcomp xxxx True False
-    U.K. U.K. PROPN NNP nsubj X.X. False False
+    U.K. U.K. PROPN NNP nsubj X.X.
+    False False 
     startup startup VERB VBD ccomp xxxx True False
     for for ADP IN prep xxx True True
     $ $ SYM $ quantmod $ False False
     1 1 NUM CD compound d False False
     billion billion NUM CD pobj xxxx True False
 ```
-## Notas
+## Notes
 
-*   Problema: Nuitka, por defecto, no puede adivinar qué módulos o     paquetes adicionales necesitas además de los que están importados directamente en tu código Python (p. ej., import spacy).
-
-*   SpaCy y sus modelos: SpaCy no solo necesita el código de la biblioteca spacy, sino que también requiere recursos específicos, como modelos de lenguaje (en este caso, en_core_web_sm). Estos modelos no son solo código Python; son directorios con archivos de datos.
+* Problem: Nuitka, by default, cannot guess what additional modules or packages you need besides those directly imported in your Python code (e.g., import spacy).
 
 
-*   `--include-package=spacy`:Esta opción fuerza a Nuitka a incluir todo el paquete spacy (todos sus módulos y subpaquetes) en el directorio de salida standalone, incluso si Nuitka no lo detecta como necesario solo mirando el main.py. Esto es útil para bibliotecas complejas como SpaCy que pueden cargar módulos dinámicamente.
-
-*    `--spacy-language-model=en_core_web_sm `:
-Esta es una opción específica de Nuitka (probablemente parte de un plugin o soporte integrado para SpaCy)
-
-*   uv sync: prepara tu entorno local con las dependencias, pero Nuitka necesita instrucciones específicas para empaquetarlas correctamente para distribución standalone.
-
-*   El proceso de compilación puede tardar varios minutos.
+* SpaCy and its models: SpaCy needs not only the library code but also specific resources, such as language models (in this case, en_core_web_sm). These models are not just Python code; they are directories with data files.
 
 
 
+* `--include-package=spacy`: This option forces Nuitka to include the entire spacy package (all its modules and subpackages) in the standalone output directory. This happens even if Nuitka doesn't detect it as necessary just by looking at main.py. This is useful for complex libraries like SpaCy that may load modules dynamically.
 
 
 
+* `--spacy-language-model=en_core_web_sm`: This is a Nuitka-specific option (likely part of a plugin or integrated support for SpaCy).
 
+
+* uv sync: This prepares your local environment with dependencies, but Nuitka needs specific instructions to package them correctly for standalone distribution.
+
+* The compilation process can take several minutes

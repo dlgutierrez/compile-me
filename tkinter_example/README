@@ -1,39 +1,49 @@
-================================================================================================
-🚀 Ejemplo funcional de como compilar una GUI con la biblioteca [CustomTkinter] con Nuitka
-================================================================================================
+=======================================================================
+🚀 Functional Example of How to Compile a GUI with the [CustomTkinter] Library using Nuitka
+=======================================================================
 
-# 1. Estar en el path del proyecto a ejecutar:
+1. Be in the project path to execute:
+
+Bash
 
 cd compile-me/tkinter_example
 
-# 2. Sincronización de Dependencias:
+2. Dependency Synchronization:
+
+Bash
 
 uv sync
 
-# 3. Compilar el proyecto con Nuitka:
+3. Compile the project with Nuitka:
+
+Bash
 
 uv run nuitka --remove-output --standalone main.py
 
-⚠️ Advertencia: Si la compilación genera un warning, es probable que el ejecutable tenga errores. La mejor práctica es evitar que se generen Warnings, ya que no podrá incluir los recursos necesarios de las librerías como CustomTkinter (los archivos .json de temas), los cuales no se incluyen automáticamente en el ejecutable por Nuitka.
+⚠️ Warning: If the compilation generates a warning, the executable is likely to have errors. The best practice is to avoid generating Warnings, as it may not be able to include the necessary resources for libraries like CustomTkinter (the theme .json files), which are not automatically included in the executable by Nuitka.
 
-## Compilación con Nuitka de forma Correcta:
 
-- Activar el plugin necesario para tkinter (--enable-plugin=tk-inter).
+4. Correct Compilation with Nuitka: 
 
-### Opciones de compilación
+Activate the necessary plugin for tkinter `(--enable-plugin=tk-inter)`.
 
-Standalone: Crear un ejecutable independiente
+## Compilation Options 
+
+
+`Standalone`: Create a self-contained executable 
+
+Bash
 
 uv run nuitka --remove-output --standalone --enable-plugin=tk-inter main.py
 
-Onefile: Incluir un solo archivo ejecutable
+`Onefile`: Include a single executable file 
+
+Bash
 
 uv run nuitka --onefile --enable-plugin=tk-inter main.py
 
-## output
+## Output
 
-Aquí tienes una captura de la interfaz:
+Here is a screenshot of the interface:
 
 ![Interfaz de la aplicación CustomTkinter](CustomTkinter.png)
-
-

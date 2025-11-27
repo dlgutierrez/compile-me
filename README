@@ -1,121 +1,138 @@
-
 ================================================================================================
-🚀 Compile-me: existe para que la gente pueda clonar y experimentar facilmente con Nuitka & uv
+🚀 Compile-me: exists so people can easily clone and experiment with Nuitka & uv
 ================================================================================================
 
-[BADGE] Versión: 1.0.0 | [BADGE] Licencia: Informational | [BADGE] Python: 3.8+
+[BADGE] Version: 1.0.0  | [BADGE] License: Informational  | [BADGE] Python: 3.8+ 
 
-Este repositorio está diseñado para desarrolladores Python que buscan llevar sus scripts o microservicios a producción con la máxima velocidad y portabilidad.
 
-Los ejemplos que se exponen en el proyecto demuestra las mejores practicas para:
+This repository is designed for Python developers looking to take their scripts or microservices to production with maximum speed and portability. The examples showcased in the project demonstrate best practices for:
 
-Gestión de Dependencias Ultra-Rápida: Uso de uv (el gestor de paquetes de Astral) para instalar, resolver y gestionar dependencias de forma casi instantánea.
 
-Distribución Simple y Segura: Compilación de la aplicación Python y todas sus dependencias en un único archivo binario ejecutable (standalone) usando Nuitka.
 
-Esto elimina la necesidad de que el usuario final instale Python o configure entornos, permitiendo un despliegue limpio y directo.
+Ultra-Fast Dependency Management: Using uv (Astral's package manager) to install, resolve, and manage dependencies almost instantly.
+
+
+Simple and Secure Distribution: Compiling the Python application and all its dependencies into a single executable binary (standalone) using Nuitka. This eliminates the need for the end-user to install Python or configure environments, allowing for clean and direct deployment.
 ---
 
-📝 TABLA DE CONTENIDOS
+📝 TABLE OF CONTENTS
 
-1.  Características Principales
-2.  Requisitos
-3.  Instalación (con uv)
-4.  Uso y Desarrollo
-5.  Compilación a Binario (con Nuitka)
-6.  Estructura del Proyecto
-7.  Licencia
-
----
-
-1. CARACTERÍSTICAS PRINCIPALES
-
-* uv: Gestión de entornos y paquetes increíblemente rápida (reemplazo de pip, pip-tools y venv).
-      https://docs.astral.sh/uv/
-* Nuitka: Compilador que transforma el código Python y sus dependencias en un binario ejecutable.
-          https://nuitka.net/
-* Rendimiento y Portabilidad: Despliega un único archivo binario, ideal para entornos sin Python preinstalado.
+1. Main Features
+2. Requirements
+3. Installation (with uv)
+4. Usage and Development
+5. Compiling to Binary (with Nuitka)
+6. Project Structure
+7. License
 
 ---
 
-2. REQUISITOS
+1. MAIN FEATURES
 
-Asegúrate de tener instalados los siguientes:
+* uv: Incredibly fast environment and package management (replacement for pip, pip-tools, and venv).
 
-* uv: Instalado globalmente.
-    # Instalación de uv (usando curl o pipx)
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    # O
+
+https://docs.astral.sh/uv/ 
+
+
+* Nuitka: Compiler that transforms Python code and its dependencies into an executable binary.
+
+
+https://nuitka.net/ 
+
+
+* Performance and Portability: Deploys a single binary file, ideal for environments without pre-installed Python.
+
+---
+
+2. REQUIREMENTS
+Make sure you have the following installed:
+
+* uv: Installed globally.
+
+  Bash
+
+# uv installation (using curl or pipx)
+    curl -LsSf https://astral.sh/uv/install.sh | 
+sh 
+    # Or
     pipx install uv
-* uv sync: Para sincronizar las dependencias dentro de cada proyecto ejemplar
-# uv pip list: Listar dependencias instaladas
-* Nuitka: Se instalará como una dependencia de desarrollo que automaticamente se sincroniza con uv sync, pero a veces requiere herramientas de compilación del sistema (como gcc o Visual Studio Build Tools).
+
+* uv sync: To synchronize dependencies within each example project.
+
+
+* uv pip list: To list installed dependencies.
+
+
+* Nuitka: Will be installed as a development dependency that   automatically synchronizes with uv sync, but sometimes requires system compilation tools (like gcc or Visual Studio Build Tools).
+
+3. INSTALLATION (with uv)
+
+Clone the repository and use uv to set up your development environment:
+
+Bash
+
+# 1. Clone the repository
+git clone https://github.com/KRRT7/compile-me.git
+cd compile-me
+
+# 2. Initialize the virtual environment and resolve dependencies
+# uv reads pyproject.toml and automatically creates the .venv
+uv sync
 ---
 
+4. USAGE AND DEVELOPMENT
 
-3. INSTALACIÓN (con uv)
+Once the environment is activated and dependencies are synchronized, you can run the application with:
 
-Clona el repositorio y usa uv para configurar tu entorno de desarrollo:
+Bash
 
-    # 1. Clonar el repositorio
-    git clone https://github.com/KRRT7/compile-me.git
-    cd compile-me
+# uv run
 
-    # 2. Inicializar el entorno virtual y resolver dependencias
-    # uv lee pyproject.toml y crea el .venv automáticamente
-    uv sync
----
 
-4. USO Y DESARROLLO
+5. COMPILING TO BINARY (with Nuitka)
+To generate a standalone executable that includes everything needed to run the API without external dependencies:
 
-Una vez activado el entorno e sincronizadas las dependencias, puedes ejecutar con:
+Bash
 
-    # uv run
+# Standalone binary compilation command with Nuitka
+uv run nuitka \
+  --standalone \
+  --follow-imports \
+  --output-dir=dist \
+  --include-package=uvicorn.server \
+  --plugin-enable=pyside6 \
+  app/main.py
 
----
+Result: The binary executable and its dependencies will be found in the dist/main.onefile.exe folder (the name may vary depending on the OS).
 
-5. COMPILACIÓN A BINARIO (con Nuitka)
+Running the Binary
 
-Para generar un ejecutable standalone (autónomo) que incluya todo lo necesario para correr la API sin dependencias externas:
+Bash
 
-    # Comando de compilación a binario (standalone) con Nuitka
-    uv run nuitka \
-      --standalone \
-      --follow-imports \
-      --output-dir=dist \
-      --include-package=uvicorn.server \
-      --plugin-enable=pyside6 \
-      app/main.py
+# Execute the compiled binary (Linux/macOS example)
+./dist/app.bin.dist/app.main
+# Or on Windows:
+.\dist\app.main.exe
 
-Resultado: El ejecutable binario y sus dependencias se encontrarán en la carpeta dist/main.onefile.exe (el nombre puede variar según el SO).
+# Onefile binary compilation command (--onefile) with Nuitka
+uv run nuitka --onefile main.py
 
-Ejecución del Binario
-    # Ejecutar el binario compilado (ejemplo Linux/macOS)
-    ./dist/app.bin.dist/app.main
-    # O en Windows:
-    .\dist\app.main.exe
-
-    # Comando de compilación a binario (--onefile) con Nuitka
-    uv run nuitka --onefile main.py
-
----
-
-6. ESTRUCTURA DEL PROYECTO
-
-.
+6. PROJECT STRUCTURE
+. [cite: 15]
 ├── COMPILE-ME/
-│   ├── __init__.py
-│   └── fast_api_example              # aplicación principal de FastAPI  
-    └── NLP_example                   # aplicación principal de NLP 
-    └── tkinter_example               # aplicacion principal de una GUI 
-├── .gitignore
-├── pyproject.toml           # Define dependencias (instaladas con uv)
-├── uv.lock                  # Lock file de uv (para builds reproducibles)
-├── LICENSE                # Este archivo
-└── README
-
+│   ├── __init__.py 
+│   └── fast_api_example              # main FastAPI application 
+    └── NLP_example                   # main NLP application 
+    └── tkinter_example               # main GUI application 
+├── .gitignore 
+├── pyproject.toml                    # Defines dependencies 
+(installed with uv) 
+├── uv.lock                           # uv Lock file (for reproducible builds) [cite: 16]
+├── LICENSE                           # This file 
+└── README 
 ---
 
-7. LICENCIA
+7. LICENSE
 
-Este proyecto está bajo la Licencia (http://www.apache.org/licenses/). Consulta el archivo LICENSE para obtener más detalles.
+This project is under the License (http://www.apache.org/licenses/). See the LICENSE file for more details.
