@@ -1,0 +1,39 @@
+================================================================================================
+🚀 Ejemplo funcional de como compilar una GUI con la biblioteca [CustomTkinter] con Nuitka
+================================================================================================
+
+# 1. Estar en el path del proyecto a ejecutar:
+
+cd compile-me/tkinter_example
+
+# 2. Sincronización de Dependencias:
+
+uv sync
+
+# 3. Compilar el proyecto con Nuitka:
+
+uv run nuitka --remove-output --standalone main.py
+
+⚠️ Advertencia: Si la compilación genera un warning, es probable que el ejecutable tenga errores. La mejor práctica es evitar que se generen Warnings, ya que no podrá incluir los recursos necesarios de las librerías como CustomTkinter (los archivos .json de temas), los cuales no se incluyen automáticamente en el ejecutable por Nuitka.
+
+## Compilación con Nuitka de forma Correcta:
+
+- Activar el plugin necesario para tkinter (--enable-plugin=tk-inter).
+
+### Opciones de compilación
+
+Standalone: Crear un ejecutable independiente
+
+uv run nuitka --remove-output --standalone --enable-plugin=tk-inter main.py
+
+Onefile: Incluir un solo archivo ejecutable
+
+uv run nuitka --onefile --enable-plugin=tk-inter main.py
+
+## output
+
+Aquí tienes una captura de la interfaz:
+
+![Interfaz de la aplicación CustomTkinter](CustomTkinter.png)
+
+

@@ -1,60 +1,59 @@
-
 =======================================================================
-🚀 Ejemplo funcional de como compilar un servidor FastAPI con Nuitka
+🚀 Functional Example of How to Compile a FastAPI Server with Nuitka
 =======================================================================
 
-# 1. **Estar en el path del proyecto a ejecutar:**
-    ```bash
-        cd compile-me/fast_api_example
-    ```
-# 2. **Instalar las dependencias que contiene pyproject.toml (utiliza uv.lock para acelerar el proceso):**
-    ```bash
-        uv sync
-    ```
+1. Be in the path of the project to execute: 
 
-# 3 **Ejecutar uv run crea y activa el entorno virtual **
-    ```bash
-        uv run
-    ```
+```bash
+    cd compile-me/fast_api_example
+```
+2. Install the dependencies contained in pyproject.toml (uses uv.lock to speed up the process): 
 
-    La API estará disponible en: http://localhost:5000
-    Documentación Interactiva (Swagger UI): http://localhost:5000/docs
+```bash
+    uv sync
+```
+3. Execute uv run, which creates and activates the virtual environment: 
 
-# 3 **Compilacion a Binario:**
+```bash
+    uv run
+```
 
-    --standalone: Empaqueta todas las dependencias.
-    --onefile: Genera un único ejecutable (opcional; puedes omitirlo si prefieres carpeta).
-    uv run nuitka --remove-output --standalone main.py
-    uv run nuitka --remove-output --standalone client.py
-    uv run nuitka --onefile main.py
-    uv run nuitka --onefile client.py
+The API will be available at: http://localhost:5000
+Interactive Documentation (Swagger UI): http://localhost:5000/docs
 
-    ⚠️ Si usas --onefile, tener en cuenta que la primera ejecución puede ser lenta porque el ejecutable se descomprime en disco. 
+4. Compilation to Binary: 
 
-    luego correr el main.py que es el server (renombrar a server.py para que sea mas claro)
-    y en otra ventana correr el client.py
+* `--standalone`: Packages all dependencies. 
+* `--onefile`: Generates a single executable (optional; you can omit it if you prefer a folder). 
 
+* uv run nuitka --remove-output --standalone main.py 
+* uv run nuitka --remove-output --standalone client.py 
+* uv run nuitka --onefile main.py
+* uv run nuitka --onefile client.py 
 
-deberias ver el siguiente output:
+⚠️ If you use `--onefile`, keep in mind that the first execution might be slow because the executable is decompressed to disk. 
+
+Then run `main.py`, which is the server (rename to `server.py` for clarity) 
+
+and run `client.py` in another window.
+You should see the following output:
 
 ## server.py
     ```pycon
     INFO:     Started server process [8912]
     INFO:     Waiting for application startup.
-    INFO:     Application startup complete.
+    INFO:     Application startup complete. [cite: 6]
     INFO:     Uvicorn running on http://127.0.0.1:5000 (Press CTRL+C to quit)
     INFO:     127.0.0.1:52912 - "GET / HTTP/1.1" 200 OK
     INFO:     127.0.0.1:52914 - "GET /items/42 HTTP/1.1" 200 OK
     INFO:     127.0.0.1:50329 - "GET /items/123?q=test+query HTTP/1.1" 200 OK
     INFO:     127.0.0.1:50332 - "GET /items/999?q=another+test HTTP/1.1" 200 OK
     ```
-
-## client.py
-
+##  client.py
     ```pycon
     🚀 Testing FastAPI endpoints...
 
-    Testing root endpoint (GET /)...
+    Testing root endpoint (GET /)... [cite: 7]
     Status Code: 200
     Response: {'Hello': 'World'}
     --------------------------------------------------
@@ -69,18 +68,12 @@ deberias ver el siguiente output:
     Testing items endpoint (GET /items/999)...
     Status Code: 200
     Response: {'item_id': 999, 'q': 'another test'}
-    --------------------------------------------------
+    -------------------------------------------------- 
     ```
+## remove-output
 
-## --remove-output
+What does it do?: It removes the output directory (e.g., dist/main.dist) before starting the compilation. 
 
-*  Qué hace? : Elimina el directorio de salida (por ejemplo, dist/main.dist) antes de iniciar la compilación.
-Es útil cuando usas --standalone o --onefile, para asegurarte de que no queden archivos de una compilación anterior.
+It is useful when you use --standalone or --onefile to ensure no files from a previous compilation remain. 
 
-*  No elimina carpetas como .venv, build, ni archivos temporales de Python.
-
-
-
-
-
-
+It does not delete folders like .venv, build, or temporary Python files.
